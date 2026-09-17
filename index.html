@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Паспорт качества — тайёрлаш</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app" id="appRoot">
+  <h1>📋 Паспорт качества тайёрлаш</h1>
+  <p class="sub">Маҳсулотни танланг, кунлик маълумотларни тўлдиринг → пастдаги «PDF тайёрлаш» тугмасини босинг. Битта варакда икки нусха чиқади.</p>
+
+  <div class="card">
+    <h2>Маҳсулот</h2>
+    <div class="field">
+      <label>Наименование и марка изделий</label>
+      <select id="f_product" onchange="onProductChange()"></select>
+    </div>
+    <div class="preview" id="productPreview"></div>
+  </div>
+
+  <div class="card">
+    <h2>Кунлик маълумотлар</h2>
+    <div class="field">
+      <label>Номер партии</label>
+      <input id="f_partiya" type="text" placeholder="масалан: 045">
+    </div>
+    <div class="field">
+      <label>Число изделий в партии</label>
+      <input id="f_soni" type="text" placeholder="масалан: 2 (шт автоматик қўшилади)">
+    </div>
+    <div class="field">
+      <label>Дата изготовления изделий</label>
+      <input id="f_date" type="date">
+    </div>
+    <div class="field">
+      <label>Нусхалар сони (шу мaҳсулот учун)</label>
+      <div class="copy-toggle">
+        <button type="button" class="copy-toggle-btn active" data-copies="2" onclick="setCopyMode(2)">Иккита (жуфт)</button>
+        <button type="button" class="copy-toggle-btn" data-copies="1" onclick="setCopyMode(1)">Битта (тоқ)</button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-add" onclick="addToList()">➕ Рўйхатга қўшиш</button>
+  </div>
+
+  <div class="card">
+    <div class="list-head">
+      <h2 style="margin:0;">Кунлик рўйхат <span id="listCount"></span></h2>
+      <button type="button" class="btn btn-light btn-sm" onclick="clearList()">Рўйхатни тозалаш</button>
+    </div>
+    <p class="sub" style="margin:6px 0 10px;">Бир нечта маҳсулотни қўшсангиз, ҳар бири алоҳида варақда, биттa PDF ичида чиқади. Рўйхат бўш бўлса, юқоридаги форма ўзи биттa варақ учун ишлатилади.</p>
+    <div id="listBox"><p class="list-empty">Рўйхат бўш.</p></div>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <button class="btn btn-light" style="flex:0 0 auto;" onclick="resetForm()">Тозалаш</button>
+  <button class="btn-primary" id="pdfBtn" onclick="openChoiceModal()">⬇️ PDF тайёрлаш</button>
+</div>
+
+<div id="choiceModal" class="sig-modal">
+  <div class="sig-modal-inner">
+    <p class="sig-modal-title">PDF нима қилинсин?</p>
+    <div class="sig-modal-actions">
+      <button type="button" class="btn btn-light" onclick="closeChoiceModal()">Бекор қилиш</button>
+      <button type="button" class="btn-primary" style="flex:1;" onclick="doPrint('download')">⬇️ Юклаб олиш</button>
+      <button type="button" class="btn-primary" style="flex:1;" onclick="doPrint('share')">📤 Жўнатиш</button>
+    </div>
+  </div>
+</div>
+
+<div id="printSheetWrap">
+  <div id="printSheet"></div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>

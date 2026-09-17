@@ -1,0 +1,340 @@
+:root{
+  --ink:#1a1a1a;
+  --line:#000;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --bg:#f4f5f7;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+body.modal-open{
+  position:fixed;
+  left:0;
+  right:0;
+  width:100%;
+  overflow:hidden;
+}
+
+/* ---------- Screen (form) UI ---------- */
+.app{
+  max-width:640px;
+  margin:0 auto;
+  padding:16px 16px 100px;
+}
+h1{
+  font-size:20px;
+  margin:8px 0 2px;
+}
+.sub{
+  color:var(--muted);
+  font-size:13px;
+  margin:0 0 18px;
+}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:14px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+}
+.card h2{
+  font-size:14px;
+  margin:0 0 12px;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.field{
+  margin-bottom:10px;
+}
+.field label{
+  display:block;
+  font-size:12.5px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.field input, .field select{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #d1d5db;
+  border-radius:9px;
+  font-size:15px;
+  font-family:inherit;
+  background:#fbfbfc;
+}
+.field input:focus, .field select:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:#fff;
+}
+.copy-toggle{
+  display:flex;
+  gap:8px;
+}
+.copy-toggle-btn{
+  flex:1;
+  border:1px solid #d1d5db;
+  background:#fbfbfc;
+  color:var(--ink);
+  padding:9px 8px;
+  border-radius:9px;
+  font-size:13.5px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+}
+.copy-toggle-btn.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.btn{
+  border:none;
+  border-radius:9px;
+  padding:9px 14px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+}
+.btn-light{
+  background:#eef2ff;
+  color:var(--accent);
+}
+.btn-light:active{background:#e0e7ff;}
+.footer-bar{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(6px);
+  border-top:1px solid #e5e7eb;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  display:flex;
+  gap:10px;
+  max-width:640px;
+  margin:0 auto;
+}
+.btn-primary{
+  flex:1;
+  background:var(--accent);
+  color:#fff;
+  padding:13px;
+  font-size:15.5px;
+  border-radius:11px;
+}
+.btn-primary:active{background:#1d4ed8;}
+.btn-add{
+  width:100%;
+  margin-top:4px;
+  background:#eef2ff;
+  color:var(--accent);
+  padding:10px;
+  font-size:14px;
+}
+.btn-add:active{background:#e0e7ff;}
+.btn-sm{
+  padding:6px 10px;
+  font-size:12px;
+  flex:0 0 auto;
+}
+
+/* ---------- Кунлик рўйхат UI ---------- */
+.list-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.list-empty{
+  color:var(--muted);
+  font-size:13px;
+  margin:0;
+}
+.list-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid #eef0f3;
+}
+.list-row:last-child{border-bottom:none;}
+.list-row-main{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.list-row-main b{
+  font-size:14px;
+}
+.list-row-sub{
+  font-size:11.5px;
+  color:var(--muted);
+}
+.list-row-del{
+  flex:0 0 auto;
+  border:none;
+  background:#fef2f2;
+  color:#dc2626;
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+}
+
+/* ---------- Маҳсулот preview ---------- */
+.preview{
+  background:#f8fafc;
+  border:1px dashed #cbd5e1;
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:12.5px;
+  color:#374151;
+  line-height:1.6;
+}
+.preview-line b{
+  color:var(--accent);
+  margin-right:4px;
+}
+
+/* ---------- Choice modal (jo'natish / yuklab olish) ---------- */
+.sig-modal{
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.55);
+  z-index:10000;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  overscroll-behavior:none;
+  touch-action:none;
+}
+.sig-modal.open{
+  display:flex;
+}
+.sig-modal-inner{
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+  width:100%;
+  max-width:420px;
+}
+.sig-modal-title{
+  font-size:13.5px;
+  color:var(--muted);
+  margin:0 0 10px;
+  text-align:center;
+}
+.sig-modal-actions{
+  display:flex;
+  gap:8px;
+  margin-top:4px;
+}
+.sig-modal-actions .btn, .sig-modal-actions .btn-primary{
+  flex:1;
+}
+
+/* ---------- Print sheet ---------- */
+#printSheetWrap{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  overflow:hidden;
+  z-index:9999;
+  background:#fff;
+}
+#printSheetWrap.capturing{
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+#printSheet{
+  width:190mm;
+}
+/* Ҳар бир .sheet — биттa маҳсулот (1 ёки 2 нусха). Улар кетма-кет
+   жойлашади: варақ тўлганда html2pdf ўзи кейинги саҳифага ўтади, лекин бир
+   маҳсулотнинг чегара чизиғини (ва икки нусхасини) иккига бўлиб юбормайди
+   ("avoid-all" режими шуни таъминлайди). Улар орасида атиги ~1 см жой
+   қолдирилади.*/
+.sheet{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  gap:6mm;
+  background:#fff;
+  margin-bottom:10mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.copy{
+  border:1px solid #000;
+  padding:6mm 7mm;
+  font-family:"Times New Roman", Georgia, serif;
+  font-size:13.5px;
+  color:#000;
+  min-height:0;
+}
+
+.p-head{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:4px;
+}
+.p-logo{
+  height:44px;
+  width:auto;
+  flex:0 0 auto;
+}
+.p-maker{
+  flex:1;
+  text-align:center;
+  font-size:13.5px;
+  line-height:1.5;
+  padding-right:44px;
+}
+.p-title{
+  text-align:center;
+  font-size:15px;
+  font-weight:bold;
+  margin:2px 0 0;
+}
+.p-subtitle{
+  text-align:center;
+  font-size:13px;
+  margin:0 0 10px;
+}
+.p-items{
+  font-size:13px;
+  line-height:1.75;
+}
+.p-line{
+  margin:0;
+}
+.p-line .u{
+  border-bottom:1px solid #000;
+  padding:0 2px;
+}
+.p-note{
+  margin-top:8px;
+  text-align:center;
+  font-size:12.5px;
+  line-height:1.5;
+}
+.p-sig{
+  display:flex;
+  justify-content:space-between;
+  margin-top:14px;
+  font-size:13px;
+}
