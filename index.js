@@ -61,6 +61,22 @@ const PRODUCTS = [
   { name: 'ЛЖ-1,6', grade: 'V15', steel: 'А500 Ø16.' },
   { name: 'ЛЖ-2,8', grade: 'V15', steel: 'А500 Ø16.' },
   { name: 'УБ-1', grade: 'V15', steel: 'А500 Ø16.' },
+
+  /* ---- Янги қўшилган маҳсулотлар (кабель лоток ва плиталар) ---- */
+  { name: 'Кабельный лоток Л 13-11', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 12-8', grade: 'V22_5', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 11-8', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 8-8', grade: 'V22_5', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 8-11', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 6-8', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 5-8', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 5-15', grade: 'V30', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 2-8', grade: 'V22_5', steel: 'А500 Ø12, Ø8.' },
+  { name: 'Кабельный лоток Л 20.5', grade: 'V30', steel: 'А500 Ø8.' },
+  { name: 'Плита прекрытая ПЛ 5д-5', grade: 'V30', steel: 'А500 Ø8.' },
+  { name: 'Плита прекрытая ПЛ 7д-3', grade: 'V30', steel: 'А500 Ø8.' },
+  { name: 'Плита прекрытая ПЛ 10д-3', grade: 'V30', steel: 'А500 Ø8.' },
+  { name: 'Плита прекрытая ПЛ 10.5', grade: 'V30', steel: 'А500 Ø8.' },
 ];
 
 let copyMode = 2;
@@ -280,20 +296,6 @@ async function doPrint(mode){
   wrapEl.classList.add('capturing');
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
-  // ЧЕГАРА ЧИЗИҚЛАРИ МУАММОСИНИНГ ТЎЛИҚ ЕЧими:
-  // 1) scrollX:0, scrollY:0 — бизнинг #printSheet элементи "position:fixed"
-  //    билан ҳамма вақт (0,0) нуқтада турибди, шунинг учун ҳақиқий саҳифа
-  //    қаерга скролл қилинганини ҳисобга олиш КЕРАК ЭМАС (аввалги уриниш
-  //    "-window.scrollX/-window.scrollY"ни қўшгани сабабли, агар фойдаланувчи
-  //    формани пастга скролл қилиб тугмани босса, шунча пиксел юқориси
-  //    "кесилиб" кетарди — худди сиз кўрган ҳолат).
-  // 2) windowWidth/windowHeight — варакнинг ўз scrollWidth/Height'идан БИР ОЗ
-  //    КАТТАРОҚ (буфер билан) берилади, чунки html2canvas ичкарида озгина
-  //    жой (масалан, виртуал скроллбар учун) талаб қилади; айнан шу ерга
-  //    тиқилиб қолган рақам (буфер йўқ) четдаги чизиқни кесиб қўярди.
-  //    document.documentElement.scrollHeight ишлатиш ХАТО — у "fixed"
-  //    элементларни ҳисобга олмайди (шунинг учун варакнинг пасти "кесилиб",
-  //    ўрнига бўш жой қолиб кетди).
   const opt = {
     margin: [5,5,5,5],
     filename: filename,
@@ -303,8 +305,6 @@ async function doPrint(mode){
       useCORS: true,
       scrollX: 0,
       scrollY: 8,
-      // windowWidth: sheetEl.scrollWidth + 60,
-      // windowHeight: sheetEl.scrollHeight + 60
     },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all'] }
